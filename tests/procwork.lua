@@ -18,5 +18,13 @@ elseif arg[ 1 ] == "7" then
   for l in io.lines() do
     io.write( l, "\n" )
   end
+elseif arg[ 1 ] == "8" then
+	local count = 4
+	while count>0 do
+		count=count-1
+		io.write(count,"\n")
+		io.flush ()
+		require'socket'.sleep(2)
+	end
 end
 

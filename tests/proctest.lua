@@ -74,4 +74,25 @@ options2.stdout:close()
 print( h:wait() )
 
 ___''
+h = assert( proc.spawn( lua_command..' procwork.lua 8', options ) )
+print'block wait until finish'
+print( h:wait() )
 
+___''
+h = assert( proc.spawn( lua_command..' procwork.lua 8', options ) )
+print'execute background'
+local h2=h--avoid gc
+
+if h2 then
+	require'socket'.sleep(4)
+	print(h2:wait())
+	--[[
+		stdout  3
+		2
+		stdout  1
+		stdout  0
+		
+		--
+		注意，3、2一起进入同一个回调，区分1、0。
+	]]
+end
